@@ -1,9 +1,19 @@
 import { TASK_ADDED } from "../constants";
 
-// const initialState1 = [
+// const initialState = [
 //   { id: 0, title: "Buscar Pão", startedAt: "10:00", fineshedAt: "11:00" },
-//   { id: 1, title: "Buscar Pão", startedAt: "10:00", fineshedAt: "11:00" },
-//   { id: 2, title: "Buscar Pão", startedAt: "10:00", fineshedAt: "11:00" },
+//   {
+//     id: 1,
+//     title: "Cuidar do cachorro",
+//     startedAt: "10:00",
+//     fineshedAt: "11:00",
+//   },
+//   {
+//     id: 2,
+//     title: "Por o lixo para fora",
+//     startedAt: "10:00",
+//     fineshedAt: "11:00",
+//   },
 // ];
 
 const initialState = [];
@@ -22,7 +32,7 @@ const tasksReducer = (state = initialState, action) => {
       {
         id: getId(state),
         title: action.payload,
-        startedAt: new Date(),
+        startedAt: new Date().toLocaleString("en-US"),
         finishedAt: "",
       },
     ];

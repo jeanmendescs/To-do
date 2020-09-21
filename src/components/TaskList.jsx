@@ -13,7 +13,8 @@ const TaskList = ({ tasks }) => {
       </div>
     );
   });
-  return <div>{/* <ul>{() => renderTasks}</ul> */}</div>;
+  // return <div>{<ul>{renderTasks}</ul>}</div>;
+  return 1;
 };
 
 const mapStateToProps = (state) => {
