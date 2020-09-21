@@ -1,18 +1,18 @@
 import { TASK_ADDED } from "../constants";
 
-// const initialState = [
+// const initialState1 = [
 //   { id: 0, title: "Buscar Pão", startedAt: "10:00", fineshedAt: "11:00" },
+//   { id: 1, title: "Buscar Pão", startedAt: "10:00", fineshedAt: "11:00" },
+//   { id: 2, title: "Buscar Pão", startedAt: "10:00", fineshedAt: "11:00" },
 // ];
 
 const initialState = [];
 
-const getId = (state) => 1; //func iterar sobre state p descborir maior id e retornar id + 1
-
-const asd = (state) => {
-  if (!state) {
-    return { id: 1 };
+const getId = (state) => {
+  if (state === undefined || state.length === 0) {
+    return 1;
   }
-  return (Math.max(...state.map((task) => task.id)) === 444) + 1;
+  return state.map((task) => task.id).sort((a, b) => b - a)[0] + 1;
 };
 
 const tasksReducer = (state = initialState, action) => {
@@ -20,7 +20,7 @@ const tasksReducer = (state = initialState, action) => {
     return [
       ...state,
       {
-        id: 1,
+        id: getId(state),
         title: action.payload,
         startedAt: new Date(),
         finishedAt: "",
