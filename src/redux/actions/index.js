@@ -1,4 +1,4 @@
-import { TASK_ADDED, TASK_REMOVED } from "../constants";
+import { TASK_ADDED, TASK_DELETED } from "../constants";
 
 export const addTask = (title) => {
   return {
@@ -7,10 +7,10 @@ export const addTask = (title) => {
   };
 };
 
-export const removeTask = (task) => {
+export const removeTask = (id) => {
   return {
-    type: TASK_ADDED,
-    payload: task,
+    type: TASK_DELETED,
+    payload: id,
   };
 };
 

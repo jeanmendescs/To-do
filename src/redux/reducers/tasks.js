@@ -1,20 +1,4 @@
-import { TASK_ADDED } from "../constants";
-
-// const initialState = [
-//   { id: 0, title: "Buscar Pão", startedAt: "10:00", fineshedAt: "11:00" },
-//   {
-//     id: 1,
-//     title: "Cuidar do cachorro",
-//     startedAt: "10:00",
-//     fineshedAt: "11:00",
-//   },
-//   {
-//     id: 2,
-//     title: "Por o lixo para fora",
-//     startedAt: "10:00",
-//     fineshedAt: "11:00",
-//   },
-// ];
+import { TASK_ADDED, TASK_DELETED } from "../constants";
 
 const initialState = [];
 
@@ -26,20 +10,25 @@ const getId = (state) => {
 };
 
 const tasksReducer = (state = initialState, action) => {
-  if (action.type === TASK_ADDED) {
-    return [
-      ...state,
-      {
-        id: getId(state),
-        title: action.payload,
-        startedAt: new Date().toLocaleString("en-US"),
-        finishedAt: "",
-      },
-    ];
+  switch (action.type) {
+    case TASK_ADDED:
+      if (state.find((task) => task.title === action.payload)) {
+        return state;
+      }
+      return [
+        ...state,
+        {
+          id: getId(state),
+          title: action.payload,
+          startedAt: new Date().toLocaleString("en-US"),
+          finishedAt: "",
+        },
+      ];
+    case TASK_DELETED:
+      return state.filter((task) => task.id !== action.payload);
+    default:
+      return state;
   }
-  return state;
 };
 
 export default tasksReducer;
-
-//id para identificar cada task

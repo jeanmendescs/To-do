@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addTask } from "../redux/actions";
 
-const Input = ({ addTask, tasks }) => {
+const Input = ({ addTask }) => {
   const [term, setTerm] = useState("");
-
   return (
     <div>
       <input
