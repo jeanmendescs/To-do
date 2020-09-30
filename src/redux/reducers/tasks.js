@@ -1,4 +1,4 @@
-import { TASK_ADDED, TASK_DELETED } from "../constants";
+import { TASK_ADDED, TASK_DELETED, TASK_COMPLETED } from "../constants";
 
 const initialState = [];
 
@@ -21,11 +21,24 @@ const tasksReducer = (state = initialState, action) => {
           id: getId(state),
           title: action.payload,
           startedAt: new Date().toLocaleString("en-US"),
-          finishedAt: "",
+          isCompleted: false,
         },
       ];
     case TASK_DELETED:
       return state.filter((task) => task.id !== action.payload);
+    case TASK_COMPLETED:
+      const test = state.map((task) => {
+        if (task.id === action.payload) {
+          if (!task.isCompleted) {
+            task.isCompleted = true;
+            return task;
+          }
+          task.isCompleted = false;
+          return task;
+        }
+        return task;
+      });
+      return test;
     default:
       return state;
   }

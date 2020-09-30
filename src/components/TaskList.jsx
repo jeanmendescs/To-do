@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { removeTask } from "../redux/actions";
+import { removeTask, completeTask } from "../redux/actions";
 import "./style.css";
 
-const TaskList = ({ tasks, removeTask }) => {
-  //sempre que for usar funcoes para renderizar usar func anonima () =>
+const TaskList = ({ tasks, removeTask, completeTask, abc }) => {
   const renderTasks = () =>
     tasks.map((task) => {
+      const conditionalRender =
+        task.isCompleted === true ? "strikethrough" : "";
       return (
-        <div key={task.id}>
-          <li>{task.title}</li>
-          <li>{task.startedAt}</li>
+        <div
+          className={conditionalRender}
+          key={task.id}
+          onClick={() => completeTask(task.id)}
+        >
+          <li>{`Tarefa: ${task.title}`} </li>
+          <li>{`Criada em: ${task.startedAt}`}</li>
           <li>{task.fineshedAt}</li>
-          <button onClick={() => removeTask(task.id)}>Remove Task</button>
+          <button
+            className={conditionalRender}
+            onClick={() => removeTask(task.id)}
+          >
+            Remove Task
+          </button>
         </div>
       );
     });
@@ -27,6 +37,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     removeTask: (id) => {
       dispatch(removeTask(id));
+    },
+    completeTask: (id) => {
+      dispatch(completeTask(id));
     },
   };
 };

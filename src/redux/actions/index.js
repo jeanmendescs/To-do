@@ -1,4 +1,4 @@
-import { TASK_ADDED, TASK_DELETED } from "../constants";
+import { TASK_ADDED, TASK_DELETED, TASK_COMPLETED } from "../constants";
 
 export const addTask = (title) => {
   return {
@@ -14,4 +14,9 @@ export const removeTask = (id) => {
   };
 };
 
-//criar actoins para remoacao, adcao e edicao
+export const completeTask = (id) => {
+  return {
+    type: TASK_COMPLETED,
+    payload: id,
+  };
+};

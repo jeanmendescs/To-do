@@ -6,3 +6,9 @@ ul {
   padding: 0;
   margin: 0;
 }
+.strikethrough {
+  text-decoration: line-through;
+}
+.teste {
+  display: flex;
+}
