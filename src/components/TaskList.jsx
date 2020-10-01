@@ -1,28 +1,44 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { removeTask, completeTask } from "../redux/actions";
+import { removeTask, completeTask, editTask } from "../redux/actions";
 import "./style.css";
 
-const TaskList = ({ tasks, removeTask, completeTask, abc }) => {
+const TaskList = ({ tasks, removeTask, completeTask, editTask }) => {
+  const [showField, setShowField] = useState(true);
+  const [renameTask, setRenameTask] = useState("");
+
   const renderTasks = () =>
     tasks.map((task) => {
+      console.log(tasks);
       const conditionalRender =
         task.isCompleted === true ? "strikethrough" : "";
       return (
-        <div
-          className={conditionalRender}
-          key={task.id}
-          onClick={() => completeTask(task.id)}
-        >
-          <li>{`Tarefa: ${task.title}`} </li>
-          <li>{`Criada em: ${task.startedAt}`}</li>
-          <li>{task.fineshedAt}</li>
-          <button
+        <div key={task.id}>
+          <div
             className={conditionalRender}
-            onClick={() => removeTask(task.id)}
+            onDoubleClick={() => setShowField(!showField)}
           >
-            Remove Task
-          </button>
+            {!showField ? (
+              <li>{`Task: ${task.title}`} </li>
+            ) : (
+              <label>
+                {" "}
+                Task:
+                <input
+                  value={renameTask}
+                  onChange={(e) => setRenameTask(e.target.value)}
+                  type="text"
+                />
+                <button onClick={() => editTask(task.id, renameTask)}>
+                  Rename Task
+                </button>
+              </label>
+            )}
+
+            <li>{`Created at: ${task.startedAt}`}</li>
+          </div>
+          <button onClick={() => completeTask(task.id)}>Finish Task</button>
+          <button onClick={() => removeTask(task.id)}>Remove Task</button>
         </div>
       );
     });
@@ -40,6 +56,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     completeTask: (id) => {
       dispatch(completeTask(id));
+    },
+    editTask: (id, title) => {
+      dispatch(editTask({ id, title }));
     },
   };
 };

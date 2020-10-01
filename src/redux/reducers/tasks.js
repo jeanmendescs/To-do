@@ -1,4 +1,9 @@
-import { TASK_ADDED, TASK_DELETED, TASK_COMPLETED } from "../constants";
+import {
+  TASK_ADDED,
+  TASK_DELETED,
+  TASK_COMPLETED,
+  TASK_EDITED,
+} from "../constants";
 
 const initialState = [];
 
@@ -12,7 +17,10 @@ const getId = (state) => {
 const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
     case TASK_ADDED:
-      if (state.find((task) => task.title === action.payload)) {
+      if (
+        state.find((task) => task.title === action.payload) ||
+        !action.payload
+      ) {
         return state;
       }
       return [
@@ -27,7 +35,7 @@ const tasksReducer = (state = initialState, action) => {
     case TASK_DELETED:
       return state.filter((task) => task.id !== action.payload);
     case TASK_COMPLETED:
-      const test = state.map((task) => {
+      return state.map((task) => {
         if (task.id === action.payload) {
           if (!task.isCompleted) {
             task.isCompleted = true;
@@ -38,7 +46,15 @@ const tasksReducer = (state = initialState, action) => {
         }
         return task;
       });
-      return test;
+    case TASK_EDITED:
+      return state.map((task) => {
+        console.log(action);
+        if (task.id === action.payload.id && action.payload.title !== "") {
+          task.title = action.payload.title;
+          return task;
+        }
+        return task;
+      });
     default:
       return state;
   }
