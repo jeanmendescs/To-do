@@ -4,35 +4,38 @@ import { removeTask, completeTask, editTask } from "../redux/actions";
 import "./style.css";
 
 const TaskList = ({ tasks, removeTask, completeTask, editTask }) => {
-  const [showField, setShowField] = useState(true);
+  const [showField, setShowField] = useState(false);
   const [renameTask, setRenameTask] = useState("");
 
   const renderTasks = () =>
     tasks.map((task) => {
-      console.log(tasks);
       const conditionalRender =
         task.isCompleted === true ? "strikethrough" : "";
+      const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+          editTask(task.id, renameTask);
+          setShowField(!showField);
+        }
+      };
       return (
         <div key={task.id}>
-          <div
-            className={conditionalRender}
-            onDoubleClick={() => setShowField(!showField)}
-          >
+          <div className={conditionalRender}>
             {!showField ? (
-              <li>{`Task: ${task.title}`} </li>
+              <li onClick={() => setShowField(!showField)}>
+                {`Task: ${task.title}`}{" "}
+              </li>
             ) : (
-              <label>
-                {" "}
-                Task:
+              <React.Fragment>
+                <span onClick={() => setShowField(!showField)}>Task:</span>
                 <input
+                  className="editTaskInput"
+                  id="editTaskInput"
                   value={renameTask}
                   onChange={(e) => setRenameTask(e.target.value)}
                   type="text"
+                  onKeyDown={handleKeyDown}
                 />
-                <button onClick={() => editTask(task.id, renameTask)}>
-                  Rename Task
-                </button>
-              </label>
+              </React.Fragment>
             )}
 
             <li>{`Created at: ${task.startedAt}`}</li>

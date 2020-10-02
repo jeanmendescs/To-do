@@ -48,7 +48,6 @@ const tasksReducer = (state = initialState, action) => {
       });
     case TASK_EDITED:
       return state.map((task) => {
-        console.log(action);
         if (task.id === action.payload.id && action.payload.title !== "") {
           task.title = action.payload.title;
           return task;
