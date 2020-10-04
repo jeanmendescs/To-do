@@ -11,7 +11,6 @@ const Input = ({ addTask }) => {
       setTerm("");
     }
   };
-  console.log(term);
   return (
     <div>
       <input
