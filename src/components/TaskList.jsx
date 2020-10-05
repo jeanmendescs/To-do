@@ -1,37 +1,41 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { removeTask, completeTask, editTask } from "../redux/actions";
-import "./style.css";
 
 const TaskList = ({ tasks, removeTask, completeTask, editTask }) => {
-  const [showField, setShowField] = useState(false);
-  const [renameTask, setRenameTask] = useState("");
+  const [isEdited, setIsEdited] = useState(false);
+  const [newTitle, setNewTitle] = useState("");
 
   const renderTasks = () =>
     tasks.map((task) => {
       const conditionalRender =
         task.isCompleted === true ? "strikethrough" : "";
+      const handleTitle = (e) => setNewTitle(e.target.value);
+      const toggleEdited = (isEdited) => {
+        setIsEdited(!isEdited);
+      };
       const handleKeyDown = (event) => {
         if (event.key === "Enter") {
-          editTask(task.id, renameTask);
-          setShowField(!showField);
+          editTask(task.id, newTitle);
+          toggleEdited(isEdited);
         }
       };
+
       return (
         <div key={task.id}>
           <div className={conditionalRender}>
-            {!showField ? (
-              <li onClick={() => setShowField(!showField)}>
-                {`Task: ${task.title}`}{" "}
+            {!isEdited ? (
+              <li onClick={() => toggleEdited(isEdited)}>
+                {`Title: ${task.title}`}{" "}
               </li>
             ) : (
               <React.Fragment>
-                <span onClick={() => setShowField(!showField)}>Task:</span>
+                <span onClick={() => toggleEdited(isEdited)}>Task:</span>
                 <input
                   className="editTaskInput"
                   id="editTaskInput"
-                  value={renameTask}
-                  onChange={(e) => setRenameTask(e.target.value)}
+                  value={newTitle}
+                  onChange={handleTitle}
                   type="text"
                   onKeyDown={handleKeyDown}
                 />
@@ -49,7 +53,7 @@ const TaskList = ({ tasks, removeTask, completeTask, editTask }) => {
 };
 
 const mapStateToProps = (state) => {
-  return { tasks: state.tasks };
+  return { ...state.tasks };
 };
 
 const mapDispatchToProps = (dispatch) => {

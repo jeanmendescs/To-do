@@ -1,6 +1,7 @@
 import React from "react";
 import TaskList from "./components/TaskList";
 import Input from "./components/Input";
+import "./style.css";
 
 const App = () => {
   return (
