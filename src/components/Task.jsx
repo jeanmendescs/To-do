@@ -21,6 +21,10 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
   const handleCompleteTask = () => completeTask({ id: task.id });
   const handleRemoveTask = () => removeTask({ id: task.id });
 
+  const handleBlur = () => {
+    setIsEdited((isEdited) => !isEdited);
+  };
+
   return (
     <React.Fragment>
       <div className={`div-li ${conditionalRender}`}>
@@ -40,6 +44,7 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
                 onChange={handleTitle}
                 onKeyDown={handleKeyDown}
                 placeholder="Title"
+                onBlur={handleBlur}
               />
             </div>
           )}
