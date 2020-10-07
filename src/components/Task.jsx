@@ -1,9 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BiCheck, BiTrash } from "react-icons/bi";
 
 const Task = ({ task, removeTask, completeTask, editTask }) => {
   const [isEdited, setIsEdited] = useState(false);
   const [newTitle, setNewTitle] = useState("");
+
+  const textInput = useRef();
+
+  useEffect(() => {
+    if (isEdited) {
+      textInput.current.focus();
+    }
+  }, [isEdited]);
 
   const conditionalRender = task.isCompleted === true ? "strikethrough" : "";
   const handleTitle = (e) => setNewTitle(e.target.value);
@@ -23,6 +31,7 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
 
   const handleBlur = () => {
     setIsEdited((isEdited) => !isEdited);
+    setNewTitle("");
   };
 
   return (
@@ -45,6 +54,7 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
                 onKeyDown={handleKeyDown}
                 placeholder="Title"
                 onBlur={handleBlur}
+                ref={textInput}
               />
             </div>
           )}
@@ -52,11 +62,11 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
         <li>
           <strong>Created at:</strong> {task.startedAt}
         </li>
-        <i className="remove-task" onClick={handleRemoveTask}>
-          <BiTrash />
-        </i>
         <i className="complete-task" onClick={handleCompleteTask}>
           <BiCheck />
+        </i>
+        <i className="remove-task" onClick={handleRemoveTask}>
+          <BiTrash />
         </i>
       </div>
     </React.Fragment>
