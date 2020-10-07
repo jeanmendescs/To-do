@@ -1,6 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import { connect } from "react-redux";
-import { addTask } from "../redux/actions";
 
 const Input = ({ addTask }) => {
   const [term, setTerm] = useState("");
@@ -12,34 +10,24 @@ const Input = ({ addTask }) => {
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      addTask(term);
+      addTask({ title: term });
       setTerm("");
     }
   };
   const handleInput = (e) => setTerm(e.target.value);
 
   return (
-    <div>
+    <React.Fragment>
       <input
-        className="addTaskInput"
-        id="taskInput"
         value={term}
         onChange={handleInput}
-        type="text"
         placeholder="New task"
         onKeyDown={handleKeyDown}
         ref={textInput}
+        maxLength="26"
       />
-    </div>
+    </React.Fragment>
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addTask: (title) => {
-      dispatch(addTask(title));
-    },
-  };
-};
-
-export default connect(null, mapDispatchToProps)(Input);
+export default Input;

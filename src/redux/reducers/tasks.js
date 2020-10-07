@@ -26,7 +26,7 @@ const tasksReducer = (state = initialState, action) => {
           ...state.tasks,
           {
             id: getId(state),
-            title: action.payload,
+            title: action.payload.title,
             startedAt: new Date().toLocaleString("en-US"),
             isCompleted: false,
           },
@@ -35,13 +35,13 @@ const tasksReducer = (state = initialState, action) => {
     case TASK_DELETED:
       return {
         ...state,
-        tasks: state.tasks.filter((task) => task.id !== action.payload),
+        tasks: state.tasks.filter((task) => task.id !== action.payload.id),
       };
     case TASK_COMPLETED:
       return {
         ...state,
         tasks: state.tasks.map((task) => {
-          if (task.id === action.payload) {
+          if (task.id === action.payload.id) {
             if (!task.isCompleted) {
               task.isCompleted = true;
               return task;
