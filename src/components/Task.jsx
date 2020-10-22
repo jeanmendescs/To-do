@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { BiCheck, BiTrash } from "react-icons/bi";
+import { BiCheck, BiTrash, BiEdit } from "react-icons/bi";
 
 const Task = ({ task, removeTask, completeTask, editTask }) => {
   const [isEdited, setIsEdited] = useState(false);
+  const [editButton, setEditButton] = useState(false);
   const [newTitle, setNewTitle] = useState("");
 
   const textInput = useRef();
@@ -15,10 +16,18 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
 
   const conditionalRender = task.isCompleted === true ? "strikethrough" : "";
   const handleTitle = (e) => setNewTitle(e.target.value);
-  const toggleEdited = (isEdited) => {
+  const toggleEdited = () => {
     setIsEdited(!isEdited);
   };
-  const handleToggle = () => toggleEdited(isEdited);
+  const toggleEditButton = () => {
+    setEditButton(!editButton);
+  };
+
+  const handleToggle = (isEdited, editButton) => {
+    toggleEdited(!isEdited);
+    toggleEditButton(!editButton);
+  };
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       editTask({ id: task.id, title: newTitle });
@@ -30,8 +39,12 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
   const handleRemoveTask = () => removeTask({ id: task.id });
 
   const handleBlur = () => {
-    setIsEdited((isEdited) => !isEdited);
-    setNewTitle("");
+    if (editButton) {
+      return;
+    } else {
+      setIsEdited(() => !isEdited);
+      setNewTitle("");
+    }
   };
 
   return (
@@ -39,22 +52,21 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
       <div className={`div-li ${conditionalRender}`}>
         <div className="div-task-input">
           {!isEdited ? (
-            <li onClick={handleToggle}>
+            <li className="li-input">
               <strong>Title:</strong> {task.title}
             </li>
           ) : (
             <div className="div-edit-task-input">
-              <span onClick={handleToggle}>
-                <strong>New Title:</strong>
-              </span>
+              <strong>Title:</strong>
               <input
                 className="edit-task-input"
                 value={newTitle}
                 onChange={handleTitle}
                 onKeyDown={handleKeyDown}
-                placeholder="Title"
+                placeholder={task.title}
                 onBlur={handleBlur}
                 ref={textInput}
+                maxLength="20"
               />
             </div>
           )}
@@ -64,6 +76,9 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
         </li>
         <i className="complete-task" onClick={handleCompleteTask}>
           <BiCheck />
+        </i>
+        <i className="edit-task" onClick={() => handleToggle()}>
+          <BiEdit />
         </i>
         <i className="remove-task" onClick={handleRemoveTask}>
           <BiTrash />

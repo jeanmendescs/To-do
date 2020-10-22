@@ -24,7 +24,7 @@ const Input = ({ addTask }) => {
         placeholder="New task"
         onKeyDown={handleKeyDown}
         ref={textInput}
-        maxLength="26"
+        maxLength="20"
       />
     </React.Fragment>
   );

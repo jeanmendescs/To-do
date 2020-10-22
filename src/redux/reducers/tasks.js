@@ -5,13 +5,15 @@ import {
   TASK_EDITED,
 } from "../constants";
 import getId from "../../utils/getid";
+import { loadState, saveState } from "../../localStorage";
 
 const initialState = {
   hasError: false,
   tasks: [],
 };
 
-const tasksReducer = (state = initialState, action) => {
+const tasksReducer = (state = loadState(initialState), action) => {
+  let result;
   switch (action.type) {
     case TASK_ADDED:
       if (
@@ -20,7 +22,7 @@ const tasksReducer = (state = initialState, action) => {
       ) {
         return state;
       }
-      return {
+      result = {
         ...state,
         tasks: [
           ...state.tasks,
@@ -32,13 +34,17 @@ const tasksReducer = (state = initialState, action) => {
           },
         ],
       };
+      saveState(result);
+      return result;
     case TASK_DELETED:
-      return {
+      result = {
         ...state,
         tasks: state.tasks.filter((task) => task.id !== action.payload.id),
       };
+      saveState();
+      return result;
     case TASK_COMPLETED:
-      return {
+      result = {
         ...state,
         tasks: state.tasks.map((task) => {
           if (task.id === action.payload.id) {
@@ -52,6 +58,8 @@ const tasksReducer = (state = initialState, action) => {
           return task;
         }),
       };
+      saveState(result);
+      return result;
     case TASK_EDITED:
       return {
         ...state,
