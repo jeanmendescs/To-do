@@ -41,7 +41,12 @@ const tasksReducer = (state = loadState(initialState), action) => {
         ...state,
         tasks: state.tasks.filter((task) => task.id !== action.payload.id),
       };
-      saveState();
+      // const abc = JSON.parse(localStorage.getItem("state"));
+      // console.log(abc);
+      // console.log(action.payload.id);
+      // const test = abc.tasks.filter((task) => task.id !== action.payload.id);
+      // saveState(test);
+      // console.log(test);
       return result;
     case TASK_COMPLETED:
       result = {

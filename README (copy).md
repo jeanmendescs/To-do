@@ -2,21 +2,16 @@
 
 > Um aplicativo simples que visa te ajudar a gerenciar o seu tempo ao te proporcionar uma maneira de anotar suas tarefas e se tornar ciente delas.
 
-## Tabela de conteúdos
+## Tabela de Conteúdos
 
-<!--ts-->
+- [Descrição](#descricao)
+- [Screenshots](#screenshots)
+- [Technologies](#technologies)
+- [Setup](#setup)
+- [Status](#status)
+- [Contato](#contact)
 
-- [Descrição](#Descrição)
-- [Screenshots](#Screenshots)
-- [Tecnologias](#Tecnologias)
-- [Instalação](#Instalação)
-- [Status](#Status)
-- [Contribuição](#Contribuição)
-- [Contato](#Contato)
-
-<!--te-->
-
-## Descrição
+<a href="#descricao"> ## Descrição </a>
 
 O objetivo deste projeto é colocar em prática o conteúdo aprendido de um curso online.
 
