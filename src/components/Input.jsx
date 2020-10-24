@@ -9,7 +9,9 @@ const Input = ({ addTask }) => {
   });
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
+    if (!term) {
+      return;
+    } else if (event.key === "Enter") {
       addTask({ title: term });
       setTerm("");
     }

@@ -4,16 +4,13 @@ import {
   TASK_COMPLETED,
   TASK_EDITED,
 } from "../constants";
-import getId from "../../utils/getid";
-import { loadState, saveState } from "../../localStorage";
+import getId from "../../utils/getId";
 
 const initialState = {
-  hasError: false,
   tasks: [],
 };
 
-const tasksReducer = (state = loadState(initialState), action) => {
-  let result;
+const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
     case TASK_ADDED:
       if (
@@ -22,7 +19,7 @@ const tasksReducer = (state = loadState(initialState), action) => {
       ) {
         return state;
       }
-      result = {
+      return {
         ...state,
         tasks: [
           ...state.tasks,
@@ -34,22 +31,13 @@ const tasksReducer = (state = loadState(initialState), action) => {
           },
         ],
       };
-      saveState(result);
-      return result;
     case TASK_DELETED:
-      result = {
+      return {
         ...state,
         tasks: state.tasks.filter((task) => task.id !== action.payload.id),
       };
-      // const abc = JSON.parse(localStorage.getItem("state"));
-      // console.log(abc);
-      // console.log(action.payload.id);
-      // const test = abc.tasks.filter((task) => task.id !== action.payload.id);
-      // saveState(test);
-      // console.log(test);
-      return result;
     case TASK_COMPLETED:
-      result = {
+      return {
         ...state,
         tasks: state.tasks.map((task) => {
           if (task.id === action.payload.id) {
@@ -63,8 +51,6 @@ const tasksReducer = (state = loadState(initialState), action) => {
           return task;
         }),
       };
-      saveState(result);
-      return result;
     case TASK_EDITED:
       return {
         ...state,

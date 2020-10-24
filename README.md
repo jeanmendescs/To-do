@@ -1,6 +1,6 @@
 # To-Do List
 
-> Um aplicativo simples que visa te ajudar a gerenciar o seu tempo ao te proporcionar uma maneira de anotar suas tarefas e se tornar ciente delas.
+> Um aplicativo simples que visa te ajudar a gerenciar o seu tempo ao proporcionar uma maneira de anotar suas tarefas e se tornar ciente delas.
 
 ## Tabela de conteúdos
 
@@ -18,7 +18,7 @@
 
 ## Descrição
 
-O objetivo deste projeto é colocar em prática o conteúdo aprendido de um curso online.
+O objetivo deste projeto é colocar em prática o conteúdo aprendido de um curso online. Para tanto, foram aplicados conhecimentos de React, Redux e localStorage.
 
 ## Screenshots
 
@@ -78,7 +78,7 @@ Agradecimento especial ao Renan Filipe que tem contribuído imensamente a este p
 Sinta-se à vontade para entrar em contato comigo.
 
 <div style="display: inline-block;">
-<a href="https://www.linkedin.com/in/jean-mendes//"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Profile" ></a>
+<a target:_blank href="https://www.linkedin.com/in/jean-mendes//"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Profile" ></a>
 
 <a href="mailto:mendes.jean.cs@gmail.com"><img src="https://img.shields.io/badge/gmail-D14836?&style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail" ></a>
 

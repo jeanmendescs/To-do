@@ -1,10 +1,9 @@
 import React from "react";
-import TaskList from "./components/TaskList";
-import Input from "./components/Input";
-import * as actions from "./redux/actions/";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
+import Input from "./components/Input";
+import TaskList from "./components/TaskList";
+import * as actions from "./redux/actions/";
 import "./style.css";
 
 const App = ({ tasks, removeTask, completeTask, editTask, addTask }) => {

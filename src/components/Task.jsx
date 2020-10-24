@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { BiCheck, BiTrash, BiEdit } from "react-icons/bi";
+import { BiCheck, BiTrash, BiEdit, BiX } from "react-icons/bi";
 
 const Task = ({ task, removeTask, completeTask, editTask }) => {
   const [isEdited, setIsEdited] = useState(false);
-  const [editButton, setEditButton] = useState(false);
   const [newTitle, setNewTitle] = useState("");
+  const [isMouseClicked, setIsMouseClicked] = useState(false);
 
-  const textInput = useRef();
+  const textInputRef = useRef();
 
   useEffect(() => {
     if (isEdited) {
-      textInput.current.focus();
+      textInputRef.current.focus();
     }
   }, [isEdited]);
 
@@ -19,19 +19,23 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
   const toggleEdited = () => {
     setIsEdited(!isEdited);
   };
-  const toggleEditButton = () => {
-    setEditButton(!editButton);
+  const handleToggle = () => {
+    toggleEdited();
+  };
+  const handleClick = () => {
+    setIsMouseClicked(!isMouseClicked);
   };
 
-  const handleToggle = (isEdited, editButton) => {
-    toggleEdited(!isEdited);
-    toggleEditButton(!editButton);
+  const handleEditTask = () => {
+    editTask({ id: task.id, title: newTitle });
+    toggleEdited();
+    setNewTitle("");
   };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       editTask({ id: task.id, title: newTitle });
-      toggleEdited(isEdited);
+      toggleEdited();
       setNewTitle("");
     }
   };
@@ -39,12 +43,10 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
   const handleRemoveTask = () => removeTask({ id: task.id });
 
   const handleBlur = () => {
-    if (editButton) {
-      return;
-    } else {
-      setIsEdited(() => !isEdited);
-      setNewTitle("");
-    }
+    // if (!isMouseClicked) {
+    //   // setIsEdited(false);
+    //   // setNewTitle("");
+    // }
   };
 
   return (
@@ -65,7 +67,7 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
                 onKeyDown={handleKeyDown}
                 placeholder={task.title}
                 onBlur={handleBlur}
-                ref={textInput}
+                ref={textInputRef}
                 maxLength="20"
               />
             </div>
@@ -74,15 +76,34 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
         <li>
           <strong>Created at:</strong> {task.startedAt}
         </li>
-        <i className="complete-task" onClick={handleCompleteTask}>
-          <BiCheck />
-        </i>
-        <i className="edit-task" onClick={() => handleToggle()}>
-          <BiEdit />
-        </i>
-        <i className="remove-task" onClick={handleRemoveTask}>
-          <BiTrash />
-        </i>
+        <div>
+          {!isEdited ? (
+            <div>
+              <i className="complete-task" onClick={handleCompleteTask}>
+                <BiCheck />
+              </i>
+              <i className="edit-task" onClick={handleToggle}>
+                <BiEdit />
+              </i>
+              <i className="remove-task" onClick={handleRemoveTask}>
+                <BiTrash />
+              </i>
+            </div>
+          ) : (
+            <div>
+              <i
+                className="complete-task"
+                onClick={handleEditTask}
+                onMouseDown={handleClick}
+              >
+                <BiCheck />
+              </i>
+              <i className="remove-task" onClick={toggleEdited}>
+                <BiX />
+              </i>
+            </div>
+          )}
+        </div>
       </div>
     </React.Fragment>
   );

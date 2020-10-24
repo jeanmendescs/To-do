@@ -28,7 +28,6 @@ ul {
   border: 1px groove #8c8c8c;
   border-radius: 4px;
   padding: 5px;
-  cursor: pointer;
   transition: 400ms;
 }
 .div-li:hover {
@@ -48,6 +47,7 @@ ul {
 
 .div-edit-task-input {
   display: flex;
+  flex-grow: 1;
 }
 
 .div-edit-task-input strong {
@@ -91,6 +91,7 @@ i {
   display: flex;
   font-size: 15px;
   padding: 3px;
+  cursor: pointer;
 }
 i:hover {
   animation: shake 300ms;
