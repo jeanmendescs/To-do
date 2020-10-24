@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { BiCheck, BiTrash, BiEdit, BiX } from "react-icons/bi";
+import { BiCheck, BiTrash, BiEdit, BiX, BiPencil } from "react-icons/bi";
 
 const Task = ({ task, removeTask, completeTask, editTask }) => {
   const [isEdited, setIsEdited] = useState(false);
   const [newTitle, setNewTitle] = useState("");
-  const [isMouseClicked, setIsMouseClicked] = useState(false);
 
   const textInputRef = useRef();
 
@@ -21,9 +20,6 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
   };
   const handleToggle = () => {
     toggleEdited();
-  };
-  const handleClick = () => {
-    setIsMouseClicked(!isMouseClicked);
   };
 
   const handleEditTask = () => {
@@ -43,10 +39,8 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
   const handleRemoveTask = () => removeTask({ id: task.id });
 
   const handleBlur = () => {
-    // if (!isMouseClicked) {
-    //   // setIsEdited(false);
-    //   // setNewTitle("");
-    // }
+    setIsEdited(false);
+    setNewTitle("");
   };
 
   return (
@@ -91,12 +85,8 @@ const Task = ({ task, removeTask, completeTask, editTask }) => {
             </div>
           ) : (
             <div>
-              <i
-                className="complete-task"
-                onClick={handleEditTask}
-                onMouseDown={handleClick}
-              >
-                <BiCheck />
+              <i className="complete-task" onMouseDown={handleEditTask}>
+                <BiPencil />
               </i>
               <i className="remove-task" onClick={toggleEdited}>
                 <BiX />
