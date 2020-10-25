@@ -10,7 +10,7 @@ const persistedStore = loadState();
 const store = createStore(reducers, persistedStore);
 
 store.subscribe(() => {
-  saveState(store.getState().tasks);
+  saveState(store.getState());
 });
 
 ReactDOM.render(

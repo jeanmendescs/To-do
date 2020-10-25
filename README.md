@@ -61,18 +61,18 @@ Agradecimento especial ao Renan Filipe que tem contribuído imensamente a este p
 
 <div style="display:flex">
 <a href="https://github.com/renanfilipe">
- <img style="border-radius: 50%;" src="https://avatars0.githubusercontent.com/u/14853743?s=400&u=7aaa35230f9c5403140e545b802b21442432d15b&v=4" width="100px;" alt=""/>
+ <img height="auto" style="border-radius:50%" src="https://avatars0.githubusercontent.com/u/14853743?s=400&u=7aaa35230f9c5403140e545b802b21442432d15b&v=4" width="100px;" alt="Renan's Profile Picture"/>
  <br />
- <sub style="display:block; text-align:center;"><span >Renan Filipe</span></sub></a> <a href="https://github.com/renanfilipe" title="Profile Picture"></a>
+ <sub style="display:block; text-align:center;"><span >Renan Filipe</span></sub></a> <a href="https://github.com/renanfilipe" title="Renan's Profile Picture"></a>
 </div>
 
 ## Contato
 
 <div style="display:flex">
 <a href="https://github.com/jeanmendescs">
- <img style="border-radius: 50%;" src="https://avatars3.githubusercontent.com/u/57002849?s=400&u=fff71a8a729144edec9bfd51b2d6dd89af52e00a&v=4" width="100px;" alt=""/>
+ <img height="auto" style="border-radius:50%" src="https://avatars3.githubusercontent.com/u/57002849?s=400&u=fff71a8a729144edec9bfd51b2d6dd89af52e00a&v=4" width="100px;" alt="Jean's Profile Picture"/>
  <br />
- <sub style="display:block; text-align:center;"><span >Jean Carlos</span></sub></a> <a href="https://github.com/jeanmendescs" title="Profile Picture"></a>
+ <sub style="display:block; text-align:center;"><span >Jean Carlos</span></sub></a> <a href="https://github.com/jeanmendescs" title="Jean's Profile Picture"></a>
 </div>
 
 Sinta-se à vontade para entrar em contato comigo.
